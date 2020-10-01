@@ -22,7 +22,7 @@ packetBuffer[12]  = 49;
 packetBuffer[13]  = 0x4E;
 packetBuffer[14]  = 49;
 packetBuffer[15]  = 52; 
-int i=4; 
+int i; 
 for ( i=16;i<48;i++){
 packetBuffer[i]=0xBA;
 }
