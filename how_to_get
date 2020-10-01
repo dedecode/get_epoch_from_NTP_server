@@ -1,0 +1,41 @@
+
+
+1. connect your ESP to which NTP server you want 
+using AT command, NTP server uses UDP protocol.
+
+select server in your region,go to
+https://www.ntppool.org/zone/@
+
+To make a request to server to get the seconds info 
+you must send a 48  byte array of characters. 
+
+important indexes of this array 0,1,2,3 and 12,13,14,15
+rest is nnot important but i suggest that dont leave them NULL,
+i had a problem and then assinged them 0xBA.
+size is fatal, it must be 48 byte.
+
+packetBuffer[0] = 0xE3;
+packetBuffer[1] = 0;
+packetBuffer[2] = 6;
+packetBuffer[3] = 0xEC;
+packetBuffer[12]  = 49;
+packetBuffer[13]  = 0x4E;
+packetBuffer[14]  = 49;
+packetBuffer[15]  = 52; 
+int i=4; 
+for ( i=16;i<48;i++){
+packetBuffer[i]=0xBA;
+}
+packetBuffer[4]=0xBA;
+packetBuffer[5]=0xBA;
+packetBuffer[6]=0xBA;
+packetBuffer[7]=0xBA;
+packetBuffer[8]=0xBA;
+packetBuffer[9]=0xBA;
+packetBuffer[10]=0xBA;
+packetBuffer[11]=0xBA;
+
+Then, ervver will response with string with length of more than 44. 
+Seconds info iss hidden in indexxes 40, 41, 42 and 43.
+
+to be continue...
